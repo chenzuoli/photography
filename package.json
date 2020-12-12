@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chenzuoli/Mongo.git"
+    "url": "git+https://github.com/chenzuoli/photography.git"
   },
   "author": "chenzuoli",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chenzuoli/Mongo/issues"
+    "url": "https://github.com/chenzuoli/photography/issues"
   },
-  "homepage": "https://github.com/chenzuoli/Mongo#readme"
+  "homepage": "https://github.com/chenzuoli/photography#readme"
 }
