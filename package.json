@@ -1,7 +1,6 @@
 {
   "name": "photography",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +14,12 @@
   "bugs": {
     "url": "https://github.com/chenzuoli/photography/issues"
   },
-  "homepage": "https://github.com/chenzuoli/photography#readme"
+  "homepage": "https://github.com/chenzuoli/photography#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "description": "",
+  "dependencies": {
+    "weui-miniprogram": "^1.0.6"
+  }
 }

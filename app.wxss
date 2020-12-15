@@ -2,6 +2,8 @@
 @import "colorui/icon.wxss";
 @import "colorui/main.wxss";
 @import "aminate/aminate.wxss";
+@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+
 
 .container {
   height: 100%;

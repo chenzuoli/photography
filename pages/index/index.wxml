@@ -1,0 +1,23 @@
+<competitionlist wx:if="{{PageCur=='competitionlist'}}"></competitionlist>
+<photographer wx:if="{{PageCur=='photographer'}}"></photographer>
+<about wx:if="{{PageCur=='about'}}"></about>
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="competitionlist">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/competitionlist{{PageCur=='competitionlist'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='competitionlist'?'text-green':'text-gray'}}">比赛</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="photographer">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/photographer{{PageCur=='photographer'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='photographer'?'text-green':'text-gray'}}">摄影师</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="about">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='about'?'text-green':'text-gray'}}">我的</view>
+  </view>
+</view>

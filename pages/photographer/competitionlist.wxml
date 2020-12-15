@@ -1,0 +1,40 @@
+<!--pages/competitionlist/competitionlist.wxml-->
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+  <cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
+    <!-- <view slot="backText">返回</view> -->
+    <view slot="content">比赛</view>
+  </cu-custom>
+	<view class="padding-sm" wx:for="{{competitions}}" wx:key>
+		<view class="cu-list menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
+			<view class="cu-item {{menuArrow?'arrow':''}}">
+				<view class="content">
+					<!-- <image src="/images/logo.png" class="png" mode="aspectFit"></image> -->
+					<text class="text-black">{{item.name}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="box">
+		<view class="cu-bar tabbar bg-white">
+			<view class="action">
+				<view class="cuIcon-cu-image">
+					<image src="/images/tabbar/basics_cur.png"></image>
+				</view>
+				<view class="text-green">比赛</view>
+			</view>
+			<view class="action">
+				<view class="cuIcon-cu-image">
+					<image src="/images/tabbar/component.png"></image>
+				</view>
+				<view class="text-gray">摄影师</view>
+			</view>
+			<view class="action">
+				<view class="cuIcon-cu-image">
+					<image src="/images/tabbar/about.png"></image>
+					<!-- <view class="cu-tag badge"></view> -->
+				</view>
+				<view class="text-gray">我的</view>
+			</view>
+		</view>
+	</view>
+</scroll-view>

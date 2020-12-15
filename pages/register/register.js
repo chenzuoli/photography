@@ -1,9 +1,9 @@
 //index.js
 var zhenzisms = require('../../utils/zhenzisms.js');
-var get_code_url = 'https://pipilong.pet:7443/petcage/smsCode'
-var register_url = 'https://pipilong.pet:7443/petcage/register'
-var wx_login_url = "https://pipilong.pet:7443/petcage/wx_login"
-var get_service_private_content = 'https://pipilong.pet:7443/petcage/get_service_private_content'
+var get_code_url = 'https://localhost:7449/photography/smsCode'
+var register_url = 'https://localhost:7449/photography/register'
+var wx_login_url = "https://localhost:7449/photography/wx_login"
+var get_service_private_content = 'https://localhost:7449/photography/get_service_private_content'
 
 //获取应用实例
 const app = getApp();

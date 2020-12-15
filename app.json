@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/competitionlist/competitionlist",
+    "pages/photolist/photolist",
     "pages/login/login",
     "pages/register/register",
     "pages/userInfo/userInfo",

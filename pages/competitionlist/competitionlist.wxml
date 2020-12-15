@@ -1,0 +1,18 @@
+<!--pages/competitionlist/competitionlist.wxml-->
+<!--pages/competitionlist/competitionlist.wxml-->
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+  <cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
+    <!-- <view slot="backText">返回</view> -->
+    <view slot="content">比赛</view>
+  </cu-custom>
+	<view class="padding-sm" wx:for="{{competitions}}" wx:key>
+		<view class="cu-list menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
+			<view class="cu-item {{menuArrow?'arrow':''}}">
+				<view class="content">
+					<!-- <image src="/images/logo.png" class="png" mode="aspectFit"></image> -->
+					<text class="text-black">{{item.name}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</scroll-view>

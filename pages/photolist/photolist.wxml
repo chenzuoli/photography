@@ -1,0 +1,11 @@
+<!--pages/photolist/photolist.wxml-->
+<scroll-view class="scroll-box" scroll-x scroll-with-animation
+  scroll-into-view="{{toView}}"
+  bindtouchstart="touchStart"
+  bindtouchend="touchEnd">
+    <view wx:for="{{list}}" wx:key="{{item}}" class="card-box" id="card_{{index}}">
+      <view class="card">
+        <text>{{item}}</text>
+      </view>
+    </view>
+</scroll-view>
