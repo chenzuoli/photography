@@ -11,7 +11,9 @@
     "pages/pet_index/info/index",
     "pages/pet_index/pet_list/pet_list",
     "pages/pet_index/pet_add/pet_add",
-    "pages/protocol/protocol"
+    "pages/protocol/protocol",
+    "pages/competitionlist/info/info",
+    "pages/competitionlist/add/add"
   ],
   "window": {
     "backgroundTextStyle": "light",

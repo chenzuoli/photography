@@ -1,6 +1,7 @@
 // pages/competitionlist/competitionlist.js
 
 var competition_url = "https://localhost:7449/photography/get_competitions"
+const app = getApp();
 
 Component({
   /**
@@ -9,38 +10,11 @@ Component({
   properties: {
 
   },
-  ready: function() {
-    let token = wx.getStorageSync("token");
-    wx.request({
-      url: competition_url,
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "token": token
-      },
-      method: 'get',
-      dataType: 'json',
-      responseType: 'text',
-      complete: (res) => {},
-      fail: (res) => {
-        console.log("获取比赛列表失败。")
-        wx.showToast({
-          title: '获取失败',
-          icon: "warn",
-          duration: 1000
-        })
-      },
-      success: (result) => {
-        this.setData({
-          "competitions": result.data.data
-        })
-      }
-    })
-  },
-
-  /**
+    /**
    * Component initial data
    */
   data: {
+    ColorList: app.globalData.ColorList,
     iconList: [{
       icon: 'cardboardfill',
       color: 'red',
@@ -94,8 +68,43 @@ Component({
     }],
     gridCol:3,
     skin: false,
-    competitions: []
+    competitions: [],
+    isCard: true
   },
+  isCard(e) {
+    this.setData({
+      isCard: e.detail.value
+    })
+  },
+  ready: function() {
+    let token = wx.getStorageSync("token");
+    wx.request({
+      url: competition_url,
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "token": token
+      },
+      method: 'get',
+      dataType: 'json',
+      responseType: 'text',
+      complete: (res) => {},
+      fail: (res) => {
+        console.log("获取比赛列表失败。")
+        wx.showToast({
+          title: '获取失败',
+          icon: "warn",
+          duration: 1000
+        })
+      },
+      success: (result) => {
+        this.setData({
+          "competitions": result.data.data
+        })
+      }
+    })
+  },
+
+
 
   /**
    * Component methods
@@ -103,7 +112,15 @@ Component({
   methods: {
 
   },
-
+ 
+  adddetial: function () {
+    wx.navigateTo({
+      url: './add/add',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+   },
   
   showModal(e) {
     this.setData({
