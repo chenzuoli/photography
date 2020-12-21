@@ -1,8 +1,8 @@
 const app = getApp();
 
-var get_version_url = 'https://localhost:7449/photography/get_app_version'
-var get_service_content = 'https://localhost:7449/photography/get_service_content'
-var get_private_content = 'https://localhost:7449/photography/get_private_content'
+var get_version_url = 'https://pipilong.pet:7449/photography/get_app_version'
+var get_service_content = 'https://pipilong.pet:7449/photography/get_service_content'
+var get_private_content = 'https://pipilong.pet:7449/photography/get_private_content'
 
 Page({
     data: {

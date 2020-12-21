@@ -1,6 +1,6 @@
 // pages/photolist/photolist.js
 const DEFAULT_PAGE = 0;
-var photolist_url = "https://localhost:7449/photography/get_votes"
+var photolist_url = "https://pipilong.pet:7449/photography/get_votes"
 
 Page({
   startPageX: 0,

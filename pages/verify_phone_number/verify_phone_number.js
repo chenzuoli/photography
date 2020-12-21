@@ -1,8 +1,8 @@
 // pages/verify_phone_number/verify_phone_number.js
 var zhenzisms = require('../../utils/zhenzisms.js');
-var get_code_url = 'https://localhost:7449/photography/smsCode'
-var register_url = 'https://localhost:7449/photography/register'
-var wx_login_url = "https://localhost:7449/photography/wx_login"
+var get_code_url = 'https://pipilong.pet:7449/photography/smsCode'
+var register_url = 'https://pipilong.pet:7449/photography/register'
+var wx_login_url = "https://pipilong.pet:7449/photography/wx_login"
 
 //获取应用实例
 const app = getApp();

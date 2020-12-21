@@ -1,11 +1,11 @@
 var util = require('../../../utils/util')
 const app = getApp();
-var get_user_info = 'https://localhost:7449/photography/get_user_by_open_id'
-var get_pet_info = 'https://localhost:7449/photography/get_pet_info'
-var get_dim_pet = 'https://localhost:7449/photography/get_dim_pet'
-var add_user_pet = 'https://localhost:7449/photography/add_user_pet'
-var upload_file_url = 'https://localhost:7449/photography/upload_file'
-var add_order = 'https://localhost:7449/photography/add_order'
+var get_user_info = 'https://pipilong.pet:7449/photography/get_user_by_open_id'
+var get_pet_info = 'https://pipilong.pet:7449/photography/get_pet_info'
+var get_dim_pet = 'https://pipilong.pet:7449/photography/get_dim_pet'
+var add_user_pet = 'https://pipilong.pet:7449/photography/add_user_pet'
+var upload_file_url = 'https://pipilong.pet:7449/photography/upload_file'
+var add_order = 'https://pipilong.pet:7449/photography/add_order'
 
 Page({
   data: {

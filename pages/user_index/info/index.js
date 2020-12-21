@@ -1,6 +1,6 @@
 const app = getApp();
-var get_user_info = 'https://localhost:7449/photography/get_user_by_open_id'
-var update_user_info = "https://localhost:7449/photography/update_user_info"
+var get_user_info = 'https://pipilong.pet:7449/photography/get_user_by_open_id'
+var update_user_info = "https://pipilong.pet:7449/photography/update_user_info"
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,

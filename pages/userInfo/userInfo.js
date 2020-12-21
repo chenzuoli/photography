@@ -1,8 +1,8 @@
 var OPEN_ID = '' //储存获取到open_id 
 var SESSION_KEY = '' //储存获取到session_key
 var UNION_Id = ''
-var get_open_id_url = 'https://localhost:7449/photography/open_id'
-var get_phone_number = 'http://localhost:7449/photography/index/users/decodePhone'
+var get_open_id_url = 'https://pipilong.pet:7449/photography/open_id'
+var get_phone_number = 'http://pipilong.pet:7449/photography/index/users/decodePhone'
 const app = getApp()
 
 Page({

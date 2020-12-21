@@ -1,6 +1,6 @@
 // pages/competitionlist/competitionlist.js
 
-var competition_url = "https://localhost:7449/photography/get_competitions"
+var competition_url = "https://pipilong.pet:7449/photography/get_competitions"
 const app = getApp();
 
 Component({
@@ -112,16 +112,6 @@ Component({
   methods: {
 
   },
- 
-  adddetial: function () {
-    wx.navigateTo({
-      url: './add/add',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-   },
-  
   showModal(e) {
     this.setData({
       modalName: e.currentTarget.dataset.target

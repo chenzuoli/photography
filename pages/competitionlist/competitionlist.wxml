@@ -69,9 +69,4 @@
 	</view>
 	<text>　{{item.name}}\n\n\n\n\n\n\n</text> -->
 
-<image class="add_icon" src="../../images/icon/add-outline.svg"></image>
-
-<view bindtap='adddetial'>
-	<image class="add_icon" src="../../images/icon/add-outline.svg"></image>
-	<!-- <ion-icon class="add_icon" name="add-outline"></ion-icon> -->
-</view>
+<!-- <image class="add_icon" src="../../images/icon/add-outline.svg"></image> -->

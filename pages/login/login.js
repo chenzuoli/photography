@@ -1,6 +1,6 @@
 // pages/login/login.js
-var wx_login_url = "https://localhost:7449/photography/wx_login"
-var login_url = 'https://localhost:7449/photography/login'
+var wx_login_url = "https://pipilong.pet:7449/photography/wx_login"
+var login_url = 'https://pipilong.pet:7449/photography/login'
 const app = getApp()
 
 Page({
@@ -12,7 +12,17 @@ Page({
     userInfo: "",
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    Custom: app.globalData.Custom
+    Custom: app.globalData.Custom,
+    page_id: '/pages/index/index',
+    params: {}
+  },
+  onLoad: function(e) {
+    var that = this
+    that.setData({
+      page_id: e.page_id,
+      params: e
+    })
+    console.log("login data: "+JSON.stringify(that.data))
   },
   onGotUserInfo: function(e) {
     var that = this;
@@ -39,8 +49,22 @@ Page({
               duration: 1000
             })
             wx.setStorageSync("token", res.data.data.token)
+            // wx.navigateTo({
+            //   url: '../user_index/index/index',
+            // })
+            // wx.navigateBack({
+            //   delta: 1,
+            //   complete: (res) => {},
+            // })
+            let params = that.data.params
+            var concat_param = ''
+            for(let key in params){
+              concat_param += '&' + key + '=' + params[key]
+            }
+            concat_param = concat_param.replace(/^&/, "?")
+            console.log("concat param: " + concat_param)
             wx.navigateTo({
-              url: '../user_index/index/index',
+              url: that.data.page_id + concat_param,
             })
           },
           fail(err) {

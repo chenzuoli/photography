@@ -1,5 +1,5 @@
 const app = getApp();
-var competition_url = "https://localhost:7449/photography/get_competitions"
+var competition_url = "https://pipilong.pet:7449/photography/get_competitions"
 
 Page({
   data: {

@@ -1,66 +1,275 @@
 // pages/competitionlist/add/add.js
+const app = getApp();
+var upload_file_url = 'https://pipilong.pet:7449/photography/upload_file'
+var add_photo_url = 'https://pipilong.pet:7449/photography/add_photo'
+
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
-
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    competition_id: '',
+    phone: '',
+    nick_name: '',
+    subject: '',
+    imgList: [],
+    modalName: null,
+    actionText: "拍摄/相册",
+    picUrls: [],
+    qiniuyun_pic_urls: []
   },
-
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
-
+  onLoad: async function (options) {
+    this.setData({
+      competition_id: options.competition_id
+    })
   },
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
+  PickerChange(e) {
+    this.setData({
+      index: e.detail.value
+    })
   },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
+  MultiChange(e) {
+    console.log("multichange: ")
+    console.log(e)
+    this.setData({
+      multiIndex: e.detail.value
+    })
   },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
+  MultiColumnChange(e) {
+    var that = this
+    console.log("multicolumnchange: ")
+    console.log(e)
+    let data = {
+      multiIndex: this.data.multiIndex,
+      multiArray: this.data.multiArray
+    };
+    data.multiIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        data.multiArray[1] = that.data.pet_variety[e.detail.value];
+        data.multiIndex[1] = 0;
+        break;
+      case 1:
+        data.multiIndex[1] = e.detail.value;
+        break;
+    }
+    this.setData(data);
   },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
+  ChooseImage() {
+    var that = this
+    wx.chooseImage({
+      count: 4, //默认9
+      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album'], //从相册选择
+      success: (res) => {
+        if (that.data.imgList.length != 0) {
+          that.setData({
+            imgList: that.data.imgList.concat(res.tempFilePaths),
+            avatar: res.tempFilePaths[0]
+          })
+        } else {
+          that.setData({
+            imgList: res.tempFilePaths,
+            avatar: res.tempFilePaths[0]
+          })
+          that.data.pet.avatar_url = res.tempFilePaths[0]
+        }
+      }
+    });
   },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
+  ViewImage(e) {
+    wx.previewImage({
+      urls: this.data.imgList,
+      current: e.currentTarget.dataset.url
+    });
   },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
+  DelImg(e) {
+    wx.showModal({
+      title: '铲屎官',
+      content: '确定要删除这段回忆吗？',
+      cancelText: '再看看',
+      confirmText: '再见',
+      success: res => {
+        if (res.confirm) {
+          this.data.imgList.splice(e.currentTarget.dataset.index, 1);
+          this.setData({
+            imgList: this.data.imgList
+          })
+        }
+      }
+    })
   },
+  //用于生成uuid
+  s4: function () {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  },
+  guid: function () {
+    return (this.s4() + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + this.s4() + this.s4());
+  },
+  submit: async function (e) {
+    var that = this
+    console.log('form发生了submit事件，携带数据为：', e)
+    let contact = e.detail.value.contact
+    let nick_name = e.detail.value.nick_name
 
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
+    that.setData({
+      phone: contact,
+      nick_name: nick_name
+    })
 
+    if (that.data.picUrls.length == 0) {
+      wx.showToast({
+        title: '请上传作品',
+        icon: "warn",
+        duration: 1000
+      })
+      return
+    }
+
+    if (nick_name.length == 0) {
+      wx.showToast({
+        title: '请输入昵称',
+        icon: "warn",
+        duration: 1000
+      })
+      return
+    }
+
+    if (contact.length != 11) {
+      wx.showToast({
+        title: '请输入手机号',
+        icon: "warn",
+        duration: 1000
+      })
+      return
+    }
+
+    if (that.data.subject.length == 0) {
+      wx.showToast({
+        title: '请输入作品主题',
+        icon: "warn",
+        duration: 1000
+      })
+      return
+    }
+    
+    // 上传图像到七牛云
+    await that.upload()
+    // 添加
+    await that.addPhoto(e)
+    console.log(that.data)
+
+    wx.navigateTo({
+      url: '../info/info?competition_id=' + that.data.competition_id,
+    })
+  },
+  // 上传头像
+  upload() {
+    var that = this
+    let token = wx.getStorageSync("token");
+    console.log("token: " + token)
+    return new Promise((resolve, reject) => {
+      var pics = that.data.picUrls
+      console.log(pics)
+      for (var i = 0; i < pics.length; i++) {
+        wx.uploadFile({
+          url: upload_file_url,
+          filePath: pics[i],
+          name: 'avatarFile',
+          header: {
+            'content-type': 'multipart/form-data',
+            'token': token
+          }, // 设置请求的 header
+          formData: { 'guid': "procomment" }, // HTTP 请求中其他额外的 form data
+          success: function (res) {
+            console.log(res.data)
+            let result = JSON.parse(res.data)
+            if (result.status == '200') {
+              console.log("上传成功")
+              console.log(res)
+              that.setData({
+                qiniuyun_pic_urls: that.data.qiniuyun_pic_urls.concat(result.data),
+              })
+            }
+            resolve(res)
+          },
+          fail: function (err) {
+            console.log("上传失败")
+            console.log(err)
+            reject(err)
+          }
+        })
+      }
+    })
+  },
+  addPhoto: function() {
+    var that = this
+    let token = wx.getStorageSync('token')
+    let open_id = wx.getStorageSync('open_id')
+    console.log("add photo result: " + JSON.stringify(that.data))
+    wx.request({
+      url: add_photo_url,
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "token": token
+      },
+      method: 'post',
+      dataType: 'json',
+      responseType: 'text',
+      data: {
+        "competition_id": that.data.competition_id,
+        "phone": that.data.phone,
+        "open_id": open_id,
+        "url": that.data.qiniuyun_pic_urls,
+        "type": 'image',
+        "subject": that.data.subject,
+        "nick_name": that.data.nick_name
+      },
+      complete: (res) => {},
+      success: (res) => {
+        wx.showToast({
+          title: '添加成功',
+          icon: "success",
+          duration: 1000
+        })
+      },
+      fail:(res)=>{
+
+      }
+    })
+  },
+  changeDesc: function (e) {
+    this.setData({
+      subject: e.detail.value
+    })
+  },
+  clickPhoto: function () {
+    wx.chooseImage({
+      success: (res) => {
+        console.log(res);
+        var _picUrls = this.data.picUrls;
+        var tfs = res.tempFilePaths;
+        for (let temp of tfs) {
+          _picUrls.push(temp);
+        }
+        this.setData({
+          picUrls: _picUrls,
+          actionText: "+"
+        })
+      },
+    })
+  },
+  delPhoto: function (e) {
+    console.log(e);
+    let index = e.target.dataset.index;
+    let _picUrls = this.data.picUrls;
+    _picUrls.splice(index, 1);
+    this.setData({
+      picUrls: _picUrls
+    })
+    if (_picUrls.length == 0) {
+      this.setData({
+        actionText: "拍摄/相册"
+      })
+    }
   }
 })

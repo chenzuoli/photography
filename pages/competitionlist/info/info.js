@@ -1,21 +1,39 @@
 // pages/competitionlist/info/info.js
-var get_votes_url = "https://localhost:7449/photography/get_votes"
+var get_votes_url = "https://pipilong.pet:7449/photography/get_votes"
+var add_photo_url = "https://pipilong.pet:7449/photography/add_photo"
 
 Page({
   data: {
     cardCur: 0,
     swiperList: [],
+    competition_id: '',
     subject: '',
-    condition: ''
+    condition: '',
+    showCondition: false
   },
   onLoad(options) {
     this.towerSwiper('swiperList');
     // 初始化towerSwiper 传已有的数组名即可
     // 请求该比赛下的所有参赛作品
     let token = wx.getStorageSync('token')
+    let subject = ''
+    let condition = ''
+    if (options.subject == '' | options.subject == undefined) {
+      subject = wx.getStorageSync('subject')
+    } else {
+      subject = options.subject
+      wx.setStorageSync('subject', options.subject)
+    }
+    if (options.condition == '' | options.condition == undefined) {
+      condition = wx.getStorageSync('condition')
+    } else {
+      condition = options.condition
+      wx.setStorageSync('condition', options.condition)
+    }
     this.setData({
-      subject: options.subject,
-      condition: options.condition
+      competition_id: options.competition_id,
+      subject: subject,
+      condition: condition
     })
     wx.request({
       url: get_votes_url,
@@ -51,6 +69,24 @@ Page({
           duration: 1000
         })
       }
+    })
+  },
+  onChangeShowState: function () {
+    var that = this;
+    that.setData({
+      showCondition: (!that.data.showCondition)
+    })
+  },
+  takePartIn: function(e) {
+    let token = wx.getStorageSync('token')
+    if (token.length == 0) {
+      wx.navigateTo({
+        url: '../../login/login?page_id=../competitionlist/add/add&competition_id='+this.data.competition_id,
+      })
+      return
+    }
+    wx.navigateTo({
+      url: '../add/add?competition_id='+this.data.competition_id,
     })
   },
   DotStyle(e) {
