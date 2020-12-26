@@ -13,7 +13,8 @@
     "pages/pet_index/pet_add/pet_add",
     "pages/protocol/protocol",
     "pages/competitionlist/info/info",
-    "pages/competitionlist/add/add"
+    "pages/competitionlist/add/add",
+    "pages/photography/photography"
   ],
   "window": {
     "backgroundTextStyle": "light",

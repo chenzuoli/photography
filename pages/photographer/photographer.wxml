@@ -1,2 +1,23 @@
 <!--pages/photographer/photographer.wxml-->
-<text>pages/photographer/photographer.wxml</text>
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+	<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+		<view slot="backText">返回</view>
+		<view slot="content">我是摄影师</view>
+	</cu-custom>
+
+	<view class="blank" wx:if="{{isShow}}">
+		<view>列表为空，看看其他的吧</view>
+	</view>
+	<view wx:if="{{!isShow}}">
+		<view class="card">
+			<view wx:for="{{photographies}}" wx:key>
+				<view bindtap="onItemClick">
+					<image class="image" mode="aspectFill" src="{{item.url}}" />
+					<text class="nick_name">{{item.nick_name}}</text>
+					<view class="title">{{item.subject}}</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<image class='img' src='/images/icon/add-outline.svg' bindtap='add'></image>
+</scroll-view>

@@ -6,13 +6,13 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/competitionlist{{PageCur=='competitionlist'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='competitionlist'?'text-green':'text-gray'}}">比赛</view>
+    <view class="{{PageCur=='competitionlist'?'text-green':'text-gray'}}">比一比</view>
   </view>
   <view class="action" bindtap="NavChange" data-cur="photographer">
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/photographer{{PageCur=='photographer'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='photographer'?'text-green':'text-gray'}}">摄影师</view>
+    <view class="{{PageCur=='photographer'?'text-green':'text-gray'}}">看一看</view>
   </view>
   <view class="action" bindtap="NavChange" data-cur="about">
     <view class='cuIcon-cu-image'>
