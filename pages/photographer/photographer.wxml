@@ -1,7 +1,7 @@
 <!--pages/photographer/photographer.wxml-->
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
-	<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
-		<view slot="backText">返回</view>
+	<cu-custom bgColor="bg-gradual-pink" isBack="{{false}}">
+		<!-- <view slot="backText">返回</view> -->
 		<view slot="content">我是摄影师</view>
 	</cu-custom>
 
@@ -10,14 +10,16 @@
 	</view>
 	<view wx:if="{{!isShow}}">
 		<view class="card">
-			<view wx:for="{{photographies}}" wx:key>
+			<view wx:for="{{photographies}}" wx:key data-key='{{index}}'>
 				<view bindtap="onItemClick">
-					<image class="image" mode="aspectFill" src="{{item.url}}" />
-					<text class="nick_name">{{item.nick_name}}</text>
-					<view class="title">{{item.subject}}</view>
+					<view class="{{index===0?'subject_first':'subject_follow'}}">{{item.subject}}</view>
+					<image class="image" mode="aspectFill" src="{{item.url}}">
+						<text class="nick_name">{{item.nick_name}}</text>
+					</image>
 				</view>
 			</view>
 		</view>
 	</view>
-	<image class='img' src='/images/icon/add-outline.svg' bindtap='add'></image>
+	<image class='add' src='/images/icon/add-outline.svg' bindtap='add'></image>
+	<view class="cu-tabbar-height"></view>
 </scroll-view>

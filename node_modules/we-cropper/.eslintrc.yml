@@ -1,0 +1,12 @@
+extends: standard
+
+globals:
+  __VERSION__: false
+  wx: true
+  getCurrentPages: false
+  Page: false
+  App: false
+  getApp: false
+
+rules:
+  no-tabs: 0

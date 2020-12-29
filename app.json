@@ -6,7 +6,6 @@
     "pages/login/login",
     "pages/register/register",
     "pages/userInfo/userInfo",
-    "pages/user_index/index/index",
     "pages/user_index/info/index",
     "pages/pet_index/info/index",
     "pages/pet_index/pet_list/pet_list",
@@ -14,7 +13,8 @@
     "pages/protocol/protocol",
     "pages/competitionlist/info/info",
     "pages/competitionlist/add/add",
-    "pages/photography/photography"
+    "pages/photography/index",
+    "pages/photography/add"
   ],
   "window": {
     "backgroundTextStyle": "light",

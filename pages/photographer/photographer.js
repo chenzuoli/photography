@@ -19,7 +19,7 @@ Component({
     photographies: [],
     isShow: true
   },
-  ready: function() {
+  ready: function () {
     var that = this
     let token = wx.getStorageSync("token");
     wx.request({
@@ -34,11 +34,11 @@ Component({
       complete: (res) => {},
       fail: (res) => {
         console.log("获取作品列表失败。")
-        wx.showToast({
-          title: '获取失败',
-          icon: "warn",
-          duration: 1000
-        })
+        // wx.showToast({
+        //   title: '获取失败',
+        //   icon: "warn",
+        //   duration: 1000
+        // })
       },
       success: (result) => {
         console.log(result.data)
@@ -62,11 +62,11 @@ Component({
         isCard: e.detail.value
       })
     },
-    add(e){
+    add(e) {
       wx.navigateTo({
-        url: '../photography/photography',
+        url: '../photography/add',
       })
     }
-    
+
   }
 })
