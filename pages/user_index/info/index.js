@@ -76,6 +76,11 @@ Page({
     // 获取用户信息
     await that.get_user_info(open_id)
   },
+  onShow: function() {
+    let open_id = wx.getStorageSync("open_id");
+    console.log("open_id: " + open_id)
+    this.get_user_info(open_id)
+  },
   get_user_info: function (open_id) {
     var that = this
     let token = wx.getStorageSync("token");

@@ -1,6 +1,6 @@
 // pages/photographer/photographer.js
 const app = getApp();
-var get_photographies_url = "https://localhost:7449/photography/get_photographies"
+var get_photographies_url = "https://pipilong.pet:7449/photography/get_photographies"
 
 Component({
   /**

@@ -1,6 +1,6 @@
 const app = getApp();
 var upload_file_url = 'https://pipilong.pet:7449/photography/upload_file'
-var add_photography_url = "https://localhost:7449/photography/add_photography"
+var add_photography_url = "https://pipilong.pet:7449/photography/add_photography"
 
 Page({
   data: {

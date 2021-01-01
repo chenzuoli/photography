@@ -4,9 +4,6 @@
   <view slot="content">注册</view>
 </cu-custom>
 <form bindsubmit="save">
-  <view class="cu-form-group">
-    <image class="pipilong" src="../../images/pipilong.jpg"></image>
-  </view>
   <view class="cu-form-group margin-top">
     <view class="title">手机号</view>
     <input bindinput='bindPhoneInput' placeholder="请输入手机号" name='phone'></input>

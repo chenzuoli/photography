@@ -9,18 +9,18 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     pets: [],
-    device_id: "",
     login_status: "未登录用户，点击登录"
   },
-  onLoad(options) {
+  onLoad() {
+    this.get_pets_info()
+  },
+  onShow: function() {
+    this.get_pets_info()
+  },
+  get_pets_info: function() {
     var that = this
     let token = wx.getStorageSync("token");
 
-    that.setData({
-      device_id: options.device_id
-    });
-    console.log("获取的设备id为：")
-    console.log(that.data.device_id)
     // 查询宠物列表
     let open_id = wx.getStorageSync("open_id");
     console.log("open_id: " + open_id)
@@ -98,7 +98,7 @@ Page({
       return
     }
     wx.navigateTo({
-      url: '../pet_add/pet_add?device_id=' + that.data.device_id,
+      url: '../pet_add/pet_add',
       success: (result) => {
         console.log("跳转到宠物添加页面成功")
       },

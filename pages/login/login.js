@@ -52,20 +52,21 @@ Page({
             // wx.navigateTo({
             //   url: '../user_index/index/index',
             // })
-            // wx.navigateBack({
-            //   delta: 1,
-            //   complete: (res) => {},
-            // })
-            let params = that.data.params
-            var concat_param = ''
-            for(let key in params){
-              concat_param += '&' + key + '=' + params[key]
-            }
-            concat_param = concat_param.replace(/^&/, "?")
-            console.log("concat param: " + concat_param)
-            wx.navigateTo({
-              url: that.data.page_id + concat_param,
+            wx.navigateBack({
+              delta: 1,
+              complete: (res) => {},
             })
+            // let params = that.data.params
+            // var concat_param = ''
+            // for(let key in params){
+            //   concat_param += '&' + key + '=' + params[key]
+            // }
+            // concat_param = concat_param.replace(/^&/, "?")
+            // console.log("concat param: " + concat_param)
+            // console.log("navigate to page: " + that.data.page_id)
+            // wx.navigateTo({
+            //   url: that.data.page_id + concat_param,
+            // })
           },
           fail(err) {
             wx.showToast({

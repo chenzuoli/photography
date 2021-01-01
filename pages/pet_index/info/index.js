@@ -107,7 +107,8 @@ Page({
           console.log(result)
           that.setData({
             pet: result.data.data,
-            avatar: result.data.data.avatar_url
+            avatar: result.data.data.avatar_url,
+            date: result.data.data.birthday
           })
           console.log(that.data)
           resolve(result)
@@ -294,9 +295,12 @@ Page({
   },
   submit: async function (e) {
     var that = this
+    wx.showLoading({
+      title: '更新中'
+    })
     console.log('form发生了submit事件，携带数据为：', e)
     // 上传图像到七牛云
-    if (that.data.avatar != null) {
+    if (that.data.avatar != null & that.data.avatar.indexOf("http://tmp") != -1 ) {
       await that.upload()
     }
 
@@ -309,6 +313,7 @@ Page({
   upload() {
     var that = this
     let token = wx.getStorageSync("token");
+    console.log('avatar_url: ' + that.data.pet.avatar_url)
     return new Promise((resolve, reject) => {
       wx.uploadFile({
         url: upload_file_url,

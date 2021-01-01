@@ -36,10 +36,6 @@ Page({
   onLoad: async function (options) {
     var that = this
 
-    that.setData({
-      device_id: options.device_id
-    })
-
     let open_id = wx.getStorageSync("open_id");
     console.log("open_id: " + open_id)
 
